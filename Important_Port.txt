@@ -1,0 +1,19 @@
+IMP Port No
+-----------------------
+
+HTTPS: 443
+NGINX: 80 / 443
+HTTP: 80
+SSH: 22
+Jenkins: 8080
+Tomcat: 8080
+SMTP: 25
+Prometheous: 9090
+MYSQL : 3306
+MongoDB: 27017
+FTP: 21
+Docker Daemon API: 2375 / 2376
+Apache Kafka: 9092
+Redis: 6379
+RDP: 3389
+

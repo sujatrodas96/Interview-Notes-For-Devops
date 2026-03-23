@@ -1,0 +1,42 @@
+Ansible Cmd
+---------------------
+
+/etc/ansible/hosts --> Default inventory location
+vi /etc/ansible/inventory.ini -> create inventory file
+ansible all --list-hosts -> Test Inventory
+ansible all -m ping -> ping all hosts
+
+Playbook
+---------------------
+
+ansible-playbook playbook.yml --syntax-check --> syntaxcheck of ansible-playbook file
+ansible-playbook abc.yaml   -> execute ansible-playbook file
+
+
+
+Passwordless Authentication
+----------------------------------------
+ssh-copy-id -f "-o IdentityFile /home/sujatro/.ssh" ubuntu@44.200.21.114
+
+
+ad-hoc-cmd
+-------------------
+ansible all -i inventory.ini -m ping -> inventory connection check
+ansible aws -i inventory.ini -m apt -a "update_cache=yes name=openjdk-17-jdk state=present" --become -> java install for all server under aws groups
+ansible aws -i inventory.ini -m ping aws -> ping check all aws group server
+ansible aws -i inventory.ini -m ping all -> check all server
+
+
+formula
+-------------
+
+ansible [location_of_inventory] [which_module] -a []argument] [which_server]
+
+
+2 ways ansible can send cmd
+--------------------------------------------
+
+1. playbook
+2.adhoc-cmd
+
+

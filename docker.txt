@@ -1,0 +1,21 @@
+docker --version -- to check docker version
+docker images -- to check docker available images
+docker rmi -- to remove all the images
+docker pull <image_name/nginx> -- to pull images from docker hub
+docker run nginx -- run container
+docker run -d nginx -- run container in detach mode
+docker run -d --name mynginx nginx -- give custom name for a docker container
+docker run -d -p 8080:80 nginx -- run with port mapping
+docker ps -- to check docker all running container
+docker ps -a -- to check all docker containers
+docker start <container_id> -- to start a docker container
+docker stop <container_id> -- to stop a docker container
+docker restart <container_id> -- to restart a docker container
+docker rm <container_id> -- to remove a docker container
+docker rm -f <conatiner_id> -- force remove
+docker logs <conatiner_id> -- check logs from specific container
+docker logs -f <container_id> -- live logs of conatiner
+docker exec -it container_id bash -- execute cmd inside a container
+docker build -t myapp . -- Build Docker image
+docker system prune -- remove unused data from docker
+docker inspect <container_id> -- docker detailed info for a container

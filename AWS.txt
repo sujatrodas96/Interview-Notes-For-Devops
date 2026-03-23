@@ -1,0 +1,310 @@
+--------------------------------
+AWS IAM
+--------------------------------
+
+AWS IAM is like least previleadged permission
+
+-----------------------------------------------
+What is Groups and Permission
+-----------------------------------------------
+
+create a user 
+create a group
+add the user to the group to get same power which are getting the same type of user
+
+----------------------------------------------------
+USER with Different permission
+----------------------------------------------------
+
+if a user need different permission
+then create a user
+attched policies based on the user
+
+----------------------------------------------------
+Configure a USER through CLI
+----------------------------------------------------
+
+when creating user you will get a Access and Secret key
+then based on the key you have to configure the user through your CLI 
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+AWS Config:
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+write cmd AWS Config
+then gave Access and Secret key and the availability zone also then you should able to configure the user in your CLI
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+--------------------------------------------------------- The END ---------------------------------------
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------
+AWS EC2
+----------------------------------------------------------------------------------------
+
+EC2 (Elastic Compute Cloud) is a service that provides resizable virtual servers in the cloud.
+
+It includes:
+
+CPU
+RAM
+Storage
+Network
+Operating System
+
+Just like a physical server — but fully virtual and scalable.
+
+----------------------------------------------------------------------------------------
+Types: 
+----------------------------------------------------------------------------------------
+
+AWS offers different instance types based on workload requirements.
+
+General Purpose
+-----------------------------------------------
+Balanced compute, memory, and networking.
+
+Best for:
+
+Web servers
+Small databases
+Dev/Test environments
+
+Example: t3, t4g, m5
+
+Compute Optimized
+-----------------------------------------------
+High CPU performance.
+
+Best for:
+
+High-performance web servers
+Gaming servers
+Batch processing
+
+Example: c5
+
+Memory Optimized
+------------------------------------------------
+Designed for memory-heavy workloads.
+
+Best for:
+
+Large databases
+Real-time analytics
+Caching
+
+Example: r5
+
+Storage Optimized
+-------------------------------------------------
+High disk throughput and fast IOPS.
+
+Best for:
+
+Big data
+Data warehousing
+Log processing
+
+Example: i3
+
+Accelerated Computing
+--------------------------------------------------
+Uses GPUs or hardware accelerators.
+
+Best for:
+
+Machine Learning
+AI
+Video processing
+Scientific computing
+
+Example: p3, g4
+
+-----------------------------------------------------------------------------------------
+USER-DATA
+-----------------------------------------------------------------------------------------
+
+User Data is a script or set of commands that runs automatically when an EC2 instance launches.
+
+--------------------------------------------------------------------------------------------------------------
+Availability Zones (AZ)
+--------------------------------------------------------------------------------------------------------------
+
+An Availability Zone is an isolated data center within an AWS Region.
+
+Structure:
+
+Region → Multiple Availability Zones
+
+Example:
+
+AWS US East (N. Virginia)
+
+Contains AZs like:
+
+us-east-1a
+us-east-1b
+us-east-1c
+
+Why AZ Matters?
+
+Provides high availability
+Protects against data center failure
+Enables fault-tolerant architecture
+
+--------------------------------------------------------------------------------------------------------------
+
+
+
+--------------------------------------------------------- The END --------------------------------------------
+
+
+
+----------------------------------------------
+AWS VPC
+----------------------------------------------
+
+A VPC (Virtual Private Cloud) is a logically isolated network inside AWS where you can launch resources securely.
+--------------------------------------------------------------------------------------------------------------------
+
+Define Size of VPC == With the help of IP Address Range
+
+When creating a VPC, you must define the IP range using CIDR notation.
+
+10.0.0.0/16
+Provides 65,536 IP addresses.
+------------------------------------------------------------------------------------------
+
+Subnet == A Subnet is a smaller network inside a VPC.
+
+Used to organize resources based on security and architecture.
+
+Types:
+Public Subnet
+Has a route to the Internet Gateway
+
+Used for:
+Load Balancers
+Bastion Hosts
+Public Web Servers
+
+Private Subnet
+No direct internet access
+
+Used for:
+Databases
+Backend Applications
+Internal Services
+------------------------------------------------------------------------------------------------------------------
+
+Internet Gateway == An Internet Gateway allows communication between your VPC and the internet.
+-------------------------------------------------------------------------------------------------------------------
+
+public subnet == Typically, user traffic enters the VPC through resources placed in the public subnet such as:
+
+Load Balancer
+Bastion Host
+
+IMPORTANT:
+For security, avoid placing application servers directly in public subnets in production.
+
+Instead:
+
+User → Load Balancer (Public) → App Server (Private) 
+---------------------------------------------------------------------------------------------------
+
+Load Balancer == A Load Balancer distributes incoming traffic across multiple servers to ensure:
+
+High availability
+Fault tolerance
+Better performance
+
+It forwards requests based on configured rules.
+---------------------------------------------------------------------------------------------------
+
+Route Table == A Route Table defines where network traffic should go.
+---------------------------------------------------------------------------------------------------
+
+Security Group == A Security Group acts as a virtual firewall for EC2 instances.
+
+Allows only specified ports
+Controls inbound and outbound traffic
+
+Features:
+
+Works at instance level
+
+Stateful → If inbound is allowed, outbound is automatically allowed.
+------------------------------------------------------------------------------------------------------------------------------------------
+
+NAT Gateway == A NAT Gateway allows resources in a private subnet to access the internet without exposing their private IP addresses.
+
+Enables outbound traffic
+Blocks inbound traffic
+
+Example Uses:
+
+OS updates
+Download packages
+Pull Docker images
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+VPC Flow Logs == VPC Flow Logs capture information about IP traffic going to and from network interfaces.
+
+Used for:
+
+Monitoring
+Troubleshooting
+Security analysis
+Detecting suspicious activity
+-----------------------------------------------------------------------------------------------------------
+
+NACL = A Network ACL is another layer of security for your VPC.
+
+Features:
+
+Works at subnet level
+Supports ALLOW and DENY rules
+Stateless → Must allow inbound AND outbound separately.
+-----------------------------------------------------------------------------------------------------------
+
+Flow of a VPC
+-----------------------------------------------
+
+User (Internet)
+        ↓
+Internet Gateway (IGW)
+        ↓
+Route Table (Subnet Route Association)
+        ↓
+Network ACL (Subnet Level – Stateless)
+        ↓
+Security Group (Instance Level – Stateful)
+        ↓
+EC2 Instance (Public Subnet)
+
+
+-----------------------------------------------
+
+Private EC2
+      ↓
+Security Group
+      ↓
+NACL
+      ↓
+Route Table (0.0.0.0/0 → NAT Gateway)
+      ↓
+NAT Gateway (in Public Subnet)
+      ↓
+Internet Gateway
+      ↓
+Internet
+
+

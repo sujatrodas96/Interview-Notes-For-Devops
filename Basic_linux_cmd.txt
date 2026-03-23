@@ -1,0 +1,485 @@
+#####
+# Linux Cmd which i use frequently
+#####
+
+vi / vim / nano -> editor ***
+cp -> copy ***
+mv -> move or rename
+ls -ltr -> list with longlisted sort by time and reverse order *******
+ls -a -> show hidden files *******
+ls -lh -> human readable size
+tail -5 -> last 5 line
+head -n 5 file.txt -> show specific number line
+| -> pipe operator ***
+cat -> see file info ***
+grep -> search filter *** 
+awk -> exact column
+cd -> change directory ***
+pwd -> present working directory ***
+mkdir -> make directory ***
+rm -rf -> remove forcefully ***
+rm -> remove
+find -type f -name "*.pdf" -> find cmd location
+chmod -> file permission change ***
+chown -> change ownership ****
+ps - aux -> check process
+top -> live cpu memory monitoring
+htop -> better visualization process monitoring
+kill -9 PID -> destroy process ** -9 = forcefully ***
+df -h -> disk usage monitoring
+du -> disk usage
+free -h -> free memory
+free -m -> free memory 
+lsblk -> list block storage
+ip a -> check IP address ***
+ifconfig -> check IP address ***
+ss -tulnp -> check open ports
+curl -> health checks (Download can't resume, Best for API)  ***
+wget -> for using downloads (Download can Resume) ***
+ping -> check connectivity
+tracerouth -> network path debuging
+whoami -> verify the user ***
+tar -czvf app.tar.gz app/ -> backup and artifact packaging ***
+zip -er new_protected_folder.zip /home/sujatro/Downloads/new -> create a password protected file ***
+history -> to check the history of all cmd ***
+crontab -e -> schedule jobs ***
+systemctl status / systemctl restart / systemctl enable -> Manage Service ***
+uname -> username
+sudo -> super user
+ssh -i  -> secure shell identify file
+ln file.txt hardlink.txt --> hard link
+ln -s file.txt hardlink.txt --> Soft link
+
+#################
+Cache Clear
+#################
+
+sync; echo 3 | sudo tee /proc/sys/vm/drop_caches
+
+#################
+
+#####
+# Firewall Allow enable
+#####
+
+sudo ufw status
+sudo ufw enable
+sudo ufw disable
+sudo ufw allow 3000
+sudo ufw deny 3000
+sudo ufw reload
+sudo ufw delete allow 3000
+
+######
+
+#####
+# useful folder for Linux
+#####
+
+
+
+/etc -> configuration files ***
+/var -> variable files like logs, databases, websites ***
+/usr -> user programs and data ***
+/home -> user home directories
+/root -> root user home directory
+/bin -> essential command binaries
+/sbin -> system binaries
+/opt -> optional software packages ***
+/dev -> device files
+/proc -> process and kernel information
+/mnt -> mount point for temporarily mounted filesystems ***
+/media -> mount point for removable media
+/var/log -> log files
+/var/www -> web server files
+/var/lib -> variable state information like databases
+/var/spool -> Mail and Cron
+/var/cache -> cached data
+/var/run -> runtime variable data
+/var/tmp -> temporary files preserved between reboots
+/var/backups -> backup files
+
+/etc/passwd -> user account information
+/etc/shadow -> secure user account information
+/etc/group -> group account information
+/etc/fstab -> filesystem mount information
+/etc/hosts -> static hostname to IP address mapping
+/etc/resolv.conf -> DNS configuration
+/etc/network/interfaces -> network interface configuration
+/etc/ssh/sshd_config -> SSH server configuration
+/etc/crontab -> scheduled tasks
+/etc/sudoers -> sudo permissions configuration
+/etc/init.d/ -> init scripts for services
+/etc/systemd/ -> systemd service configuration files
+/etc/nginx/ -> Nginx web server configuration
+/etc/apache2/ -> Apache web server configuration
+/etc/mysql/ -> MySQL database configuration
+/etc/postgresql/ -> PostgreSQL database configuration
+/etc/php/ -> PHP configuration files
+/etc/logrotate.conf -> log rotation configuration
+/etc/profile -> system-wide environment variables
+/etc/bash.bashrc -> system-wide bash configuration
+/etc/aliases -> email aliases configuration
+/etc/ssl/ -> SSL certificates and keys
+/etc/default/ -> default settings for various services
+/etc/sysctl.conf -> kernel parameters configuration 
+/etc/ld.so.conf -> dynamic linker configuration
+/etc/modules-load.d/ -> kernel modules to load at boot time
+/etc/environment -> system-wide environment variable settings
+/etc/apt/ -> APT package manager configuration (Debian/Ubuntu)
+/etc/yum.repos.d/ -> YUM repository configuration (RHEL/CentOS)
+/etc/zsh/ -> Zsh shell configuration files
+/etc/logrotate.d/ -> log rotation settings for individual services
+/etc/NetworkManager/ -> NetworkManager configuration files
+/etc/pam.d/ -> Pluggable Authentication Modules configuration
+/etc/ufw/ -> Uncomplicated Firewall configuration files
+/etc/firewalld/ -> Firewalld configuration files
+/etc/selinux/ -> SELinux policy and configuration files
+/etc/sysconfig/ -> system configuration files (RHEL/CentOS)
+/etc/chrony/ -> Chrony NTP configuration files
+/etc/ntp.conf -> NTP daemon configuration
+/etc/rsyslog.conf -> rsyslog configuration file
+/etc/kernel/ -> kernel configuration files
+/etc/lvm/ -> LVM configuration files
+/etc/mdadm/ -> software RAID configuration files
+/etc/nsswitch.conf -> name service switch configuration
+/etc/apt/sources.list -> APT package sources list
+/etc/yum.conf -> YUM package manager configuration
+/etc/hosts.allow -> TCP wrappers allow rules
+/etc/hosts.deny -> TCP wrappers deny rules
+/etc/crontab -> system-wide cron jobs
+/etc/timezone -> system timezone configuration
+/etc/localtime -> local timezone file
+/etc/mailcap -> mail capabilities configuration
+/etc/mime.types -> MIME types configuration
+/etc/ssl/certs/ -> trusted CA certificates
+/etc/ssl/private/ -> private SSL keys
+/etc/cups/ -> CUPS printing system configuration
+/etc/samba/ -> Samba file sharing configuration
+/etc/nagios/ -> Nagios monitoring configuration
+/etc/zabbix/ -> Zabbix monitoring configuration
+
+/usr/bin/ -> user command binaries
+/usr/sbin/ -> system command binaries
+/usr/lib/ -> user libraries
+/usr/local/ -> locally installed software and libraries
+/usr/local/bin/ -> locally installed user command binaries
+/usr/local/sbin/ -> locally installed system command binaries
+/usr/local/lib/ -> locally installed user libraries
+/usr/share/ -> architecture-independent shared data
+/usr/include/ -> C/C++ header files
+/usr/src/ -> source code files
+/usr/games/ -> game binaries
+/usr/libexec/ -> system daemons and helper programs
+/usr/lib64/ -> 64-bit user libraries
+/usr/local/games/ -> locally installed game binaries
+/usr/local/include/ -> locally installed C/C++ header files
+/usr/local/src/ -> locally installed source code files
+/usr/local/share/ -> locally installed architecture-independent shared data 
+
+
+
+
+##########
+# User and Group Management Commands
+##########
+
+sudo useradd -m pronab -> add new user without password
+sudo adduser pronab -> add new user with password
+sudo userdel username -> delete user
+sudo passwd username -> change user password
+sudo usermod -aG devops pronab -> add user to group
+sudo usermod -aG sudo pronab
+devops pronab -> check user groups
+id pronab -> check user id and group ids
+
+
+sudo groupadd devops -> add new group
+sudo groupdel groupname -> delete group
+sudo groupmod -n newgroupname oldgroupname -> rename group
+getent group groupname -> check group info
+sudo chown user:group filename -> change file owner and group
+sudo chmod 755 filename -> change file permissions
+ls -l filename -> check file permissions
+
+######
+
+######
+# service and process cmd
+######
+
+nohup <cmd> &
+systemctl status
+#!/bin/bash -> shebang
+
+Step 1:
+
+sudo nano /etc/systemd/system/time-log.service
+
+Step 2:
+
+[Unit]
+Description=Time Logging Service
+After=network.target
+
+[Service]
+ExecStart=/home/sujatro/shell.sh
+Restart=always
+User=sujatro >> whoami result
+
+[Install]
+WantedBy=multi-user.target
+
+Step 3:
+sudo systemctl daemon-reload
+
+Step 4:
+sudo systemctl enable time-log
+
+Step 5:
+sudo systemctl start time-log
+
+Step 6:
+sudo systemctl status time-log
+
+Step 7:
+journalctl -u time-log -f
+
+
+###########
+# CRON Job
+###########
+
+
+****
+
+* * * * * command_to_run
+│ │ │ │ │
+│ │ │ │ └── Day of Week (0–7) → Sunday = 0 or 7
+│ │ │ └──── Month (1–12)
+│ │ └────── Day of Month (1–31)
+│ └──────── Hour (0–23)
+└────────── Minute (0–59)
+
+*/5 * * * * -> per 5 min
+
+10 2 * * * -> every day 2:10 AM
+
+30 2 1 * * -> every months 1st day 2:30 AM
+
+30 2 1 1 * -> 1st january 2:30 AM
+
+30 2 1 1 1 -> when January 1st is a Monday at 2:30 AM.
+
+
+crontab -e == edit 
+crontab -l == list
+
+
+#####
+
+
+#####
+# Operator in Bash
+#####
+
+
+
+| Operator | Meaning     | Example     | Result |
+| -------- | ----------- | ----------- | ------ |
+| `+`      | Addition    | `$((5+3))`  | 8      |
+| `-`      | Subtraction | `$((10-4))` | 6      |
+| `*`      | Multiply    | `$((3*4))`  | 12     |
+| `/`      | Divide      | `$((8/2))`  | 4      |
+| `%`      | Modulus     | `$((10%3))` | 1      |
+
+
+
+| Operator | Meaning          | Example           |
+| -------- | ---------------- | ----------------- |
+| `-eq`    | Equal            | `[[ $a -eq $b ]]` |
+| `-ne`    | Not equal        | `[[ $a -ne $b ]]` |
+| `-gt`    | Greater than     | `[[ $a -gt $b ]]` |
+| `-lt`    | Less than        | `[[ $a -lt $b ]]` |
+| `-ge`    | Greater or equal | `[[ $a -ge $b ]]` |
+| `-le`    | Less or equal    | `[[ $a -le $b ]]` |
+
+
+| Operator | Checks              |
+| -------- | ------------------- |
+| `-e`     | File exists         |
+| `-f`     | Regular file exists |
+| `-d`     | Directory exists    |
+| `-r`     | Readable            |
+| `-w`     | Writable            |
+| `-x`     | Executable          |
+| `-s`     | File is NOT empty   |
+
+
+| Situation           | Use       |
+| ------------------- | --------- |
+| Math                | `(( ))` ✅ |
+| Strings             | `[[ ]]` ✅ |
+| Files               | `[[ ]]` ✅ |
+| Multiple conditions | `[[ ]]` ✅ |
+
+#####
+
+
+#####
+# Chmod permission Chart
+#####
+
+| Number | Permission | Meaning                |
+| ------ | ---------- | ---------------------- |
+| `7`    | `rwx`      | Read + Write + Execute |
+| `6`    | `rw-`      | Read + Write           |
+| `5`    | `r-x`      | Read + Execute         |
+| `4`    | `r--`      | Read only              |
+| `3`    | `-wx`      | Write + Execute        |
+| `2`    | `-w-`      | Write only             |
+| `1`    | `--x`      | Execute only           |
+| `0`    | `---`      | No permission          |
+
+| Command     | Meaning                                       |
+| ----------- | --------------------------------------------- |
+| `chmod 777` | Everyone full access ⚠️ Dangerous             |
+| `chmod 755` | Owner full, others read+execute ✅ Very common |
+| `chmod 700` | Only owner access 🔐 Secure                   |
+| `chmod 644` | Owner write, others read ✅ Used for files     |
+| `chmod 600` | Owner read/write only 🔐 Password files       |
+
+
+u = user
+g = group
+o = others
+a = all
+
+#####
+
+
+#####
+# Networking
+#####
+
+ping google.com
+curl https://google.com
+traceroute google.com
+tracepath google.com
+
+
+####
+
+############
+# programing
+############
+
+grater than
+----------------
+a=10
+b=20
+
+if [[ $a -gt $b]]
+then 
+ echo "a is greater than b"
+ else
+ echo "b is gretaer than a"
+ fi
+ 
+ less than 
+ -------------
+a=10
+b=20
+ 
+ if [[ $a -lt $b]]
+then 
+ echo "a is greater than b"
+ else
+ echo "b is gretaer than a"
+ fi
+ 
+ less than equal
+ --------------------
+a=10
+b=20
+ 
+ if [[ $a -le $b]]
+then 
+ echo "a is greater than b"
+ else
+ echo "b is gretaer than a"
+ fi
+ 
+ greter than equal
+ -----------------------
+a=10
+b=20
+
+ if [[ $a -ge $b]]
+then 
+ echo "a is greater than b"
+ else
+ echo "b is gretaer than a"
+ fi
+ 
+ 
+ for loop
+ -----------
+ 
+ for i in {1..5}; do
+ echo "Number: $i"
+ done
+ 
+ 
+ while loop
+ --------------
+ 
+counter=1
+
+while [ $counter -le 5 ]
+do
+    echo "Number: $counter"
+    ((counter++))
+done
+ 
+ 
+ ###############
+ 
+ 
+ When something breaks at 2 AM, Googling isn’t fast enough.
+
+These Linux commands help engineers diagnose & fix issues in minutes 👇
+
+🚨 systemctl --failed — Instantly find broken services
+
+📄 journalctl -p 3 -xb — Show only critical system errors
+
+📉 top → press 1 — Per-CPU usage (find overload fast)
+
+🧠 free -m && swapon --show — Memory & swap pressure check
+
+💽 df -i — Check inode exhaustion (hidden disk full issue!)
+
+📂 du -ah / | sort -rh | head — What’s really eating disk
+
+🌐 ss -plant — See blocked or stuck connections
+
+🔍 lsof | wc -l — Detect file descriptor leaks
+
+⚠️ uptime — Spot system overload in 2 seconds
+
+🔁 systemctl restart service — Quick recovery move
+
+
+
+IPV4
+
+public IP vs Private IP
+CIDR
+Subnet Mask 
+Static IP
+LAN / WAN
+MAC Address, NAT 
+Security Groups, NACL
+Inbound and Outbound Rules (AWS)
+PORT Permission User firewall allow 3000
