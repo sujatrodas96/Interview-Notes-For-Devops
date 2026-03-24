@@ -1,0 +1,43 @@
+Git Configuration (First Time Setup)
+
+git config --global user.name "Your Name"
+git config --global user.email "your@gmail.com"
+git config --list
+
+
+git version -- check the git version
+
+
+git init -- initialize git repo
+git clone <repo_url> -- to download the repo code into local
+git status -- to check the current status
+git add . -- add all files from the folder(local)
+git add <filename> -- add specific file
+git diff -- to checking the difference
+git commit -m "<commit message>" -- commiting code from local
+git push -- push code to remote repo from local repo
+
+
+git branch -- to check how  any branches are in the repo
+git branch dev -- create a branch name dev
+git checkout -b dev -- checkout from main and create and will change branch dev
+git merge dev -- merge code from dev into main branch
+git pull origin main -- pull code from main branch
+git fetch -- only downloading changes one
+git pull -- download + merge
+
+git log -- Debugging deployment issues
+git log --oneline -- check logs
+git show <commit-id> -- check commit history
+
+
+git reset --soft HEAD~1 -- for undo last commit
+git reset --hard HEAD~1 -- for emergency purpose
+
+git remote -v
+git remote add origin <repo-url>
+git remote remove origin
+
+git stash
+git stash pop
+git stash list --- temporary save changes 
