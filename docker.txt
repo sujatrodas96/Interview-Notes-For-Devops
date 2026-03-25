@@ -19,3 +19,53 @@ docker exec -it container_id bash -- execute cmd inside a container
 docker build -t myapp . -- Build Docker image
 docker system prune -- remove unused data from docker
 docker inspect <container_id> -- docker detailed info for a container
+
+
+ImagePull Error vs CrashLoopBackOff
+---------------------------------------
+
+ImagePull Error: 
+-----------------
+
+Kubernetes cannot download the container image from registry.
+---------------------------------------------------------------
+
+Pod does not start at all
+
+Common Reasons
+--------------------
+Wrong image name
+Wrong tag
+Private registry authentication issue
+Network issue
+Docker Hub rate limit
+
+CrashLoopBackOff:
+------------------------
+
+Container starts successfully but crashes repeatedly.
+--------------------------------------------------------
+
+Pod goes into restart loop
+
+Common Reasons
+-------------------
+Application error
+Wrong environment variables
+Port conflict
+DB connection failure
+Memory/CPU issue
+
+
+
+To generate secret key in Terminal
+-----------------------------------
+
+sudo sh -c '
+kubectl create secret docker-registry ecr-pull-secret \
+  --docker-server=xxxxxxxxx.dkr.ecr.ap-south-1.amazonaws.com \
+  --docker-username=AWS \
+  --docker-password=$(aws ecr get-login-password --region ap-south-1) \
+  --docker-email=xxxxxx.com \
+  --dry-run=client -o yaml | kubectl apply -f -
+'

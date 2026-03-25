@@ -358,18 +358,6 @@ a = all
 #####
 
 
-#####
-# Networking
-#####
-
-ping google.com
-curl https://google.com
-traceroute google.com
-tracepath google.com
-
-
-####
-
 ############
 # programing
 ############

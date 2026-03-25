@@ -40,3 +40,4 @@ ansible [location_of_inventory] [which_module] -a []argument] [which_server]
 2.adhoc-cmd
 
 
+
