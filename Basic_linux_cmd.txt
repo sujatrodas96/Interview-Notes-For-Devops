@@ -50,6 +50,8 @@ ssh -i  -> secure shell identify file
 ln file.txt hardlink.txt --> hard link
 ln -s file.txt hardlink.txt --> Soft link
 
+sort -hr <file_name> -- Sorting big to small value
+
 #################
 Cache Clear
 #################
