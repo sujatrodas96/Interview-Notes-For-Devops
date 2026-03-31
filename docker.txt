@@ -13,6 +13,7 @@ docker stop <container_id> -- to stop a docker container
 docker restart <container_id> -- to restart a docker container
 docker rm <container_id> -- to remove a docker container
 docker rm -f <conatiner_id> -- force remove
+docker rmi -f <conatiner_id> -- image force remove
 docker logs <conatiner_id> -- check logs from specific container
 docker logs -f <container_id> -- live logs of conatiner
 docker exec -it container_id bash -- execute cmd inside a container
