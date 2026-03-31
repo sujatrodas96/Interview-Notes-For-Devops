@@ -20,6 +20,8 @@ docker exec -it container_id bash -- execute cmd inside a container
 docker build -t myapp . -- Build Docker image
 docker system prune -- remove unused data from docker
 docker inspect <container_id> -- docker detailed info for a container
+docker network ls -- show all List networks
+docker volume ls -- show all list volumes
 
 
 ImagePull Error vs CrashLoopBackOff
