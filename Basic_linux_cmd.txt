@@ -460,8 +460,42 @@ These Linux commands help engineers diagnose & fix issues in minutes 👇
 
 🔁 systemctl restart service — Quick recovery move
 
+---------------------------------------------------------
+
+PORT Debuging
+--------------
+lsof -i :3000 / netstat -tulnp / ss -tulnp -- Check which service is using this port
+
+Log Debugging
+----------------
+journalctl -xe -- View system logs
+journalctl -u apache2 -- View Logs For a Service
+journalctl -fu apache2 -- Live Logs
+
+Debugging Related
+------------------
+ip a -- Check IP
+ip route -- Check Routes
+ping google.com -- Ping Servers
+nslookup google.com -- Check DNS Resolution
+
+Connectivity Debugging
+-----------------------
+telnet google.com 80 --- Test Port Connectivity
+
+HTTP 
+------
+curl -I https://example.com --- Check response headers
+curl -V https://example.com --- Check Verbose request
+
+Apache
+---------
+apachectl configtest --- Check configuration
+apachectl -S --- List Virtual Hosts
+tail -f /var/log/apache2/error.log --- View Logs
 
 
+---------------------------------------------------------
 IPV4
 
 public IP vs Private IP
