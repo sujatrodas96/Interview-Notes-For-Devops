@@ -14,7 +14,7 @@ Ans: find /var -type f -size +1G -exec du -h {} + | sort -rh
 Without using top or htop, write a command to list the top
 5 processes consuming the most memory.
 
-Ans: ps -aux will show every process on the system.
+Ans: ps aux --sort=-%mem | head -n 6
 
 
 3. Debug High CPU Usage
@@ -23,7 +23,7 @@ thread is responsible.
 How will you identify the exact thread inside the process using Linux
 Commands?
 
-Ans: 
+Ans: top -H -p <PID>
 
 4. Extract Specific Logs Efficiently
 From a large log file (app.log), extract:
@@ -49,7 +49,7 @@ Ans: tail -f config.yaml
 Find Open Ports and Owning Process
 6. Write a command to list all listening ports along with the process name and PID.
 
-Ans: netstat -tulnp
+Ans: netstat -tulnp or ss -tulnp
 
 One-liner to Replace Text Recursively
 7. Replace the word localhost with 127.0.0.1 in all .conf
@@ -99,3 +99,12 @@ Server load is high but CPU is low. You suspect I/O wait.
 Write commands to:
 Identify processes stuck in I/O wait
 Correlate with disk usage stats
+
+Ans: 
+top                # check %wa
+vmstat 1           # confirm blocked processes
+ps -eo state,pid,cmd | grep "^D"   # stuck processes
+iotop -o           # who is doing I/O
+iostat -xz 1       # disk health
+lsof -p <PID>      # file mapping
+df -h              # disk full check
