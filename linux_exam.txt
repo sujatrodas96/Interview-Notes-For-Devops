@@ -55,7 +55,7 @@ One-liner to Replace Text Recursively
 7. Replace the word localhost with 127.0.0.1 in all .conf
 files under /etc, recursively.
 
-Ans: hosts file /etc/hosts
+Ans: find /etc -type f -name "*.conf" -exec sed -i 's/localhost/127.0.0.1/g' {} +
 
 Disk Usage per User
 8. How would you find disk usage per user in /home, sorted by usage size?
