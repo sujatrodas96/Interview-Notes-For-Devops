@@ -1,0 +1,306 @@
+1XX Informational Status Codes
+------------------------------------
+
+    These codes work behind the scenes. Users never see them.
+
+100 --- Continue
+-----------------
+    Your server received the request headers and it’s ready for the body. The client should keep sending data. This prevents wasted bandwidth on requests the server will reject anyway.
+
+101 --- Switching Protocols
+------------------------------
+    The server agreed to switch protocols. This happens when upgrading from HTTP to WebSocket or switching to HTTP/2. The change only occurs if it benefits both sides.
+
+102 --- Processing
+--------------------
+    The server’s still working on your request. You’ll see this when operations take longer than expected. It prevents timeouts on slow processes.
+
+103 --- Early Hints
+--------------------
+The server tells your browser to start preloading resources while it prepares the full response. This speeds up page rendering by letting browsers fetch CSS and JavaScript files early.
+
+2XX Success Codes Complete Guide
+----------------------------------
+
+    Success codes confirm your request worked. Here’s what each one means.
+
+200 --- OK
+------------
+    The request succeeded. What that means depends on the HTTP method. GET fetched the page. POST submitted your form. PUT updated the resource. DELETE removed it. This is the code you want to see.
+
+201 --- Created
+----------------
+    The server created a new resource. You’ll see this after POST or PUT requests. The response includes either a Location header pointing to the new resource or the URI you targeted.
+
+202 --- Accepted
+-----------------
+    The server accepted your request but hasn’t processed it yet. This works for batch operations where the server handles requests asynchronously. Your client doesn’t need to wait around for completion.
+
+203 --- Non-Authoritative Information
+--------------------------------------
+    The request worked, but a proxy modified the response. The data might differ from what the origin server sent. You’ll see this with cached or mirrored resources where intermediaries transform the content.
+
+204 --- No Content
+---------------------
+    The server processed the request successfully but isn’t sending any content back. Use this for actions that don’t require updating the browser view. Your form saved. The resource deleted. No page refresh needed.
+
+205 --- Reset Content
+----------------------
+    The request succeeded, and the client should reset the document view. Clear that form. Reset that canvas. Return to default state.
+
+206 --- Partial Content
+------------------------
+    The server’s sending part of the resource. This happens when clients use the Range header to request specific chunks. It powers resume functionality on interrupted downloads and enables video streaming.
+
+207 --- Multi-Status
+---------------------
+    The response contains status codes for multiple resources. You’ll get an XML message body with a multi-status root element. Each resource gets its own success, partial success, or failure status.
+
+208 --- Already Reported
+-------------------------
+    This code appears inside DAV responses to prevent duplicate listings. When collections contain internal members, only one resource reports 200 OK. Duplicates get 208.
+
+226 --- IM Used
+-----------------
+    The server processed a GET request and applied instance manipulations to the resource. It modified the content based on transformation rules.
+
+3XX Redirect Codes and Their Uses
+-----------------------------------
+    Redirect codes tell clients the content moved. Some redirects preserve SEO value. Others don’t.
+
+300 --- Multiple Choices
+--------------------------
+    Multiple responses exist and the client needs to pick one. This happens when resources have language versions. English or French? The response lists your options with resource details and locations. If the server prefers one, it includes a Location header for automatic redirection.
+
+301 --- Moved Permanently
+--------------------------
+    The resource permanently moved to a new URL. All future requests should use the new address. Search engines transfer the old page’s ranking to the new location. This is your go-to for permanent URL changes.
+    The response includes a link to the new URL unless you’re using a HEAD request. For methods besides GET and HEAD, redirection only happens if the client allows it.
+
+302 --- Found
+---------------
+    The resource temporarily lives at a different URI. Keep using the original address for future requests unless told otherwise. The server usually includes a link to the temporary location. Redirection only occurs if the client permits it.
+
+303 --- See Other
+--------------------
+    The server redirects the client to a different resource using GET. The server can’t provide the requested resource directly. After form submission, it redirects to a confirmation page instead of showing results inline.
+
+304 --- Not Modified
+---------------------
+    The resource hasn’t changed. Use your cached version. This code appears with GET or HEAD requests that include conditional headers like If-None-Match or If-Modified-Since. It saves bandwidth by skipping unnecessary downloads.
+
+307 --- Temporary Redirect
+----------------------------
+    The server redirects to another URI temporarily. Since it’s temporary, keep using the original address later. Unlike 302, the client must maintain the same HTTP method during redirect. POST stays POST.
+
+308 --- Permanent Redirect
+----------------------------
+    The resource permanently moved to a new URI in the HTTP header. This works like 301 except clients can’t change the request method. POST stays POST. PUT stays PUT.
+
+4XX Client Error Codes Reference
+-----------------------------------
+    These codes mean something’s wrong with the request. The problem’s on the client side.
+
+400 --- Bad Request
+---------------------
+    The server can’t process your request. Client-side error. Invalid syntax. Bad routing. Wrong parameters. Check your URL and clear browser cache to fix it.
+
+401 --- Unauthorized
+----------------------
+    The server rejected your request due to missing or invalid authentication. If you included credentials, they were wrong. The response comes with a WWW-Authenticate header showing how to access the resource. Log in with valid credentials.
+
+402 --- Payment Required
+--------------------------
+    Reserved for digital payment systems but rarely used. No clear implementation rules exist. Most services skip this code entirely.
+
+403 --- Forbidden
+------------------
+    The server understood your request but denied access. Usually due to insufficient permissions. Re-authentication won’t help. Access is permanently restricted unless you get different credentials with proper authorization.
+
+404 --- Not Found
+----------------
+    The server can’t find the requested resource. No forwarding address. In browsers, the link’s broken or wrong. In APIs, the endpoint exists but the resource doesn’t. These are broken links. They can be temporary or permanent.
+
+405 --- Method Not Allowed
+-----------------------------
+    The server recognizes the request method but the resource doesn’t support it. You tried to DELETE a read-only resource. You attempted to PUT where only GET works. The response includes an Allow header listing supported methods.
+
+406 --- Not Acceptable
+-----------------------
+    The server can’t find content matching the criteria in your Accept headers. You requested JSON but the server only serves XML. The server provides a list of available options so you can choose something suitable.
+
+407 --- Proxy Authentication Required
+---------------------------------------
+    You’re using a proxy and need valid authentication. Unlike 401, you authenticate with the proxy server, not the origin server.
+
+408 --- Request Timeout
+------------------------
+    The server didn’t receive the complete request within the allowed time. The response suggests closing the connection. You can resend the request without changes. This happens in browsers like Chrome and Firefox when pre-connection attempts timeout.
+
+409 --- Conflict
+-----------------
+    The server can’t process the request due to a conflict with the resource. It explains the issue so you can fix it and retry. Common with PUT requests when resources conflict.
+
+410 --- Gone
+-------------
+    The resource permanently disappeared. No forwarding address. Search engines remove these pages from their index. The site owner intentionally made the resource unavailable and wants all links removed.
+
+411 --- Length Required
+------------------------
+    The server rejected the request because it needs a Content-Length header. Add the header and try again.
+
+412 --- Precondition Failed
+----------------------------
+    The server couldn’t meet one or more conditions in the request headers. Your conditional request failed validation.
+
+413 --- Payload Too Large
+---------------------------
+    Your request is too large to process. The server might close the connection and include a Retry-After header suggesting when to try again.
+
+414 --- URI Too Long
+----------------------
+    The request URI exceeds what the server can handle. Rare, but happens when clients convert POST to GET with excessive query data, enter redirect loops, or attempt to exploit server vulnerabilities.
+
+415 --- Unsupported Media Type
+-------------------------------
+    The server rejected the request because the resource uses an unsupported media format. This happens when compression methods aren’t supported or content doesn’t match server expectations.
+
+416 --- Range Not Satisfiable
+------------------------------
+    The server can’t process the range in your request. The range doesn’t exist in the resource or the value’s invalid.
+
+417 --- Expectation Failed
+----------------------------
+    The server can’t meet the requirements in the request’s Expect header. Your expectations don’t match server capabilities.
+
+418 --- I’m a Teapot
+----------------------
+    An April Fools’ joke from the Hyper Text Coffee Pot Control Protocol. The server’s a teapot and can’t brew coffee. Some websites use it for requests they want to avoid.
+
+421 --- Misdirected Request
+-----------------------------
+    The client sent a request to the wrong server. The server can’t respond to the given URL. Retry with a different connection or service.
+
+422 --- Unprocessable Entity
+-----------------------------
+    The server received the request but can’t process it due to semantic errors. You entered text in a numeric field. Your data structure’s valid but the values aren’t.
+
+423 --- Locked
+-------------------
+    The resource is locked. The response includes details about the lock status.
+
+424 --- Failed Dependency
+---------------------------
+    The request failed because it depended on a previous request that also failed. Chain broken.
+
+425 --- Too Early
+-------------------
+    The server refuses to process the request because it might be replayed later. Security precaution.
+
+426 --- Upgrade Required
+-------------------------
+    The server won’t process the request unless the client switches to the required protocol in the Upgrade header. Update your protocol.
+
+428 --- Precondition Required
+--------------------------------
+    The server needs a conditional request to ensure the client’s using the correct version of the resource.
+
+429 --- Too Many Requests
+---------------------------
+    You sent too many requests in a short time. Rate limited. The server may include a Retry-After header telling you how long to wait.
+
+431 --- Request Header Fields Too Large
+-----------------------------------------
+    Your request headers are too big to process. Reduce header size and resend.
+
+451 --- Unavailable for Legal Reasons
+---------------------------------------
+    The resource was removed due to legal reasons. Site blocked. Page taken down. Legal compliance. Affects ISPs and search engines mainly.
+
+5XX Server Error Codes Explained
+------------------------------------
+
+    Server errors mean something broke on the hosting side. Not your fault.
+
+500 --- Internal Server Error
+-------------------------------
+    Generic error. The server hit an unexpected problem that prevented it from completing the request. Server administrators log detailed information for troubleshooting. You can’t fix this from the client side.
+
+501 --- Not Implemented
+-------------------------
+    The server doesn’t support the functionality needed to complete the request. Servers only need to handle GET and HEAD methods by default. The response might include a Retry-After header indicating when the functionality will be available.
+
+502 --- Bad Gateway
+--------------------
+    The gateway or proxy server received an invalid response while trying to complete the request. Something broke in the server chain. Contact your web host.
+
+503 --- Service Unavailable
+-----------------------------
+    The server can’t handle the request due to temporary overload or maintenance. Check the Retry-After header to see when to try again. Temporary condition.
+
+504 --- Gateway Timeout
+-------------------------
+    The gateway or proxy server didn’t get a timely response from the upstream server. Network issue. Server overload. Check your hosting resources.
+
+505 --- HTTP Version Not Supported
+------------------------------------
+    The server doesn’t support the HTTP version used in the request. The response explains why that version doesn’t work and lists acceptable protocols.
+
+506 --- Variant Also Negotiates
+---------------------------------
+    Server configuration error. The chosen resource variant is configured for content negotiation but isn’t a valid endpoint. Creates an infinite loop.
+
+507 --- Insufficient Storage
+-----------------------------
+    The server doesn’t have enough storage to complete the request. Disk full.
+
+508 --- Loop Detected
+-----------------------
+    The server stopped an operation because it detected an infinite loop. The process failed.
+
+510 --- Not Extended
+----------------------
+    The server needs further extensions to complete the request. The current capabilities aren’t enough.
+
+511 --- Network Authentication Required
+---------------------------------------
+    You need to authenticate to access the network. Common with captive portals on public Wi-Fi. The response includes a link to submit credentials.
+
+HTTP Request Methods and Responses
+-------------------------------------
+
+    HTTP methods tell the server what action to take. Each method has specific properties.
+    Safe methods don’t modify anything on the server. They work read-only. Idempotent methods give the same result no matter how often you run them. No unintended side effects. Cacheable methods let browsers or proxies save responses for reuse.
+
+GET
+-----
+    Retrieves data from a resource. Safe, idempotent, and cacheable. Most common method.
+
+HEAD
+-------
+    Requests the same response as GET but without a message body. Gets headers only. Safe and idempotent.
+
+POST
+-----
+    Sends data to a resource. Submits forms. Creates resources. Not idempotent. Can be cacheable under certain conditions.
+
+PUT
+-----
+    Replaces a resource or its representation entirely. Idempotent. Running it multiple times produces the same result as running it once.
+
+DELETE
+-------
+    Removes a resource. Idempotent. First deletion succeeds. Subsequent deletions find nothing to delete but don’t fail.
+
+OPTIONS
+---------
+    Shows the communication options for the resource. Safe and idempotent.
+
+TRACE
+------
+    Tests the path of a request. Debugging tool. Safe and idempotent.
+
+PATCH
+------
+    Updates part of a resource. Unlike PUT, which replaces the entire resource, PATCH modifies specific fields.
+    These request methods connect with HTTP status codes. A GET request returns 200 OK when it works or 404 Not Found when the resource doesn’t exist.
